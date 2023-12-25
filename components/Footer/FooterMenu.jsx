@@ -1,18 +1,24 @@
 import React, { memo } from 'react'
 import Image from 'next/image'
+import { AnimatePresence, easeIn, motion } from "framer-motion"
 
-export default memo(function FooterMenu({ open, elm, ind, fn }) {
+export default memo(function FooterMenu({ open, elms, ind, fn }) {
     return (
-        <ul className={ `transition-all ease-linear flex flex-col gap-[5px] md:border-b-[2px] border-[#525252] overflow-hidden${ open ? " md:pb-[10px]" : " md:gap-[0px]" }` }>
-            { elm.map((e, i) => <li
-                className={ `transition-all rounded-md duration-[0.2s] ease-linear text-[14px] font-light cursor-pointer lg:max-w-[250px] ${ i == 0 ? "text-[#a1a1a1] md:min-w-full min-h-[40px] md:hover:bg-[#ffffff53] cursor-pointer flex items-center justify-between md:text-white md:text-[17px]"
-                    : ` text-white md:text-[#a1a1a1] hover:underline overflow-hidden${ open ? ` md:max-h-[40px] md:ml-[10px]` : " md:max-h-[0px]"
-                    }` }
-                ` }
-                onClick={ () => i == 0 ? fn(ind) : null }
-                key={ i }>{ e }
-                { i == 0 && <Image src="/slideImages/arrow.png" width={ 50 } height={ 50 } alt='' className={ `transition-all w-[30px] h-[30px] hidden md:block${ open ? " rotate-[270deg]" : " rotate-[90deg]" }` } /> }
-            </li>) }
-        </ul>
+        <AnimatePresence>
+            <motion.div  className='overflow-hidden md:border-b-[2px] border-[#525252]' initial={ { height: "auto" } } transition={ { duration: 0.3, type: "ease" } } animate={ { height: (open || window.innerWidth > 1000 ? "auto" : 40) } }>
+                <h4 className='text-[#a1a1a1] md:min-w-full min-h-[40px] md:hover:bg-[#ffffff53] cursor-pointer rounded-md duration-[0.2s] ease-linear flex items-center justify-between md:text-white md:text-[11px]'
+                    onClick={ () => fn(ind) }
+                >
+                    { elms.shift() }
+                    <Image src="/slideImages/arrow.png" width={ 50 } height={ 50 } alt='' className={ `transition-all w-[30px] h-[30px] duration-[0.3s] hidden md:block${ open ? " rotate-[270deg]" : " rotate-[90deg]" }` } />
+                </h4>
+                <ul className='flex pl-[10px] pb-[10px] flex-col gap-[5px]'>
+                    { elms.map((e, i) => <li
+                        className='transition-all text-[14px] font-light cursor-pointer lg:max-w-[250px] text-white md:text-[#a1a1a1] hover:underline overflow-hidden'
+                        key={ i }>{ e }
+                    </li>) }
+                </ul>
+            </motion.div>
+        </AnimatePresence>
     )
 })

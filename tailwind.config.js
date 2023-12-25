@@ -7,11 +7,11 @@ module.exports = {
   ],
   theme: {
     screens: {
-      xs: { max: "650px" },
+      xs: { max: "500px" },
       sm: { max: "750px" },
       md: { max: "1000px" },
-      lg: { max: "1255px" },
-      xl: { min: "1550px" }
+      lg: { max: "1300px" },
+      xl: { min: "1600px" }
     }
   },
   plugins: [],

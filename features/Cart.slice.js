@@ -1,9 +1,7 @@
 import Data from "@/app/Data";
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialState = localStorage.getItem("cart")
-    ? JSON.parse(localStorage.getItem("cart"))
-    : [];
+const initialState = JSON.parse(localStorage.getItem("cart")) || []
 
 const CartSlice = createSlice({
     name: "Cart",
@@ -31,7 +29,7 @@ const CartSlice = createSlice({
             return []
         },
         changeProdQty: (state, { payload }) => {
-            state.find(elm => +elm.id === +payload.id).qty = +payload.qty 
+            state.find(elm => +elm.id === +payload.id).qty = +payload.qty
             localStorage.setItem("cart", JSON.stringify(state))
             return state
         }

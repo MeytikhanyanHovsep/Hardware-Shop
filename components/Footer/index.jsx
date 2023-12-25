@@ -11,13 +11,9 @@ export default memo(function FooterDetails() {
         ["Address", "Address: 1234 Street Adress City Address, 1234", "Phones: (00) 1234 5678", "We are open: Monday - Thursday: 9:00 AM - 5: 30 PM", "Friday: 9:00 AM - 6:00 PM", "Saturday: 11:00 AM - 5:00 PM", "E - mail: shop@email.com"]
     ];
     const cards = ["paypal", "visa", "maestro", 'discover', "american-express"]
-    const [openMenues, setOpenMenues] = useState([]);
+    const [openMenu, setOpenMenu] = useState();
 
-    const addOrRemoveMenu = (ind) => {
-        openMenues.includes(ind)
-            ? setOpenMenues(openMenues.filter(e => e != ind))
-            : setOpenMenues([...openMenues, ind])
-    }
+    const addOrRemoveMenu = (ind) => setOpenMenu(openMenu == ind ? null : ind)
 
     return <>
         <footer className='bg-[#000] py-[30px] w-full mt-[50px]'>
@@ -36,7 +32,7 @@ export default memo(function FooterDetails() {
                 </div>
                 <div className='flex flex-wrap justify-between gap-[15px] md:flex-col md:gap-[5px]'>
                     { footerMenus.map((elm, ind) => {
-                        return <FooterMenu key={ ind } elm={ elm } ind={ ind } open={ openMenues.includes(ind) } fn={ addOrRemoveMenu } />
+                        return <FooterMenu key={ ind } elms={ elm } ind={ ind } open={ openMenu == ind } fn={ addOrRemoveMenu } />
                     }) }
                 </div>
                 <div className='flex justify-between items-center flex-wrap gap-[10px] xs:gap-y-[20px]'>

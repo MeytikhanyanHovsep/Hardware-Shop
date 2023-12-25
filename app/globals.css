@@ -18,6 +18,10 @@
     padding-right: 50px;
 }
 
+.nav-menu {
+    min-height: max-content !important;
+}
+
 @media screen and (max-width:470px) {
     .product-item {
         padding: 0 auto;
@@ -28,6 +32,9 @@
     .container {
         padding-left: 20px;
         padding-right: 20px;
+    }
+    .nav-menu {
+        min-height: 0;
     }
 }
 
